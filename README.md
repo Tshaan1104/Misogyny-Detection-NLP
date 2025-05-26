@@ -123,7 +123,7 @@ Contributes to building safer online spaces via automated detection in multiling
 
 🔧 Installation & Usage
 1️⃣ Clone the repo
-git clone https://github.com/your-username/unmasking-misogyny.git
+git clone https://github.com/Tshaan1104/Misogyny-Detection-NLP
 cd unmasking-misogyny
 
 📚 References
