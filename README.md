@@ -1,143 +1,173 @@
-Unmasking Misogyny: Hierarchical Detection in Hindi-English Code-Mixed Digital Discourse
-📌 Overview
+# Unmasking Misogyny: Hierarchical Detection in Hindi-English Code-Mixed Digital Discourse
 
-Online misogyny is a growing issue in digital spaces, particularly in India, where Hindi-English code-mixed comments are common on platforms like YouTube. Detecting such misogynistic attitudes is challenging due to linguistic complexity, cultural nuances, and class imbalance.
+---
 
-This project proposes a hierarchical classification system that detects misogyny in Hindi-English code-mixed comments by performing:
+## 📑 Table of Contents
 
-Sentiment Classification → Optimistic, Pessimistic, Neutral
+- [Overview](#overview)
+- [Authors](#authors)
+- [Dataset](#dataset)
+- [Methodology](#methodology)
+- [Results](#results)
+- [Key Insights](#key-insights)
+- [Challenges](#challenges)
+- [Conclusion](#conclusion)
+- [Repository Structure](#repository-structure)
+- [Installation & Usage](#installation--usage)
+- [References](#references)
 
-Comment Categorization → Suggestion, Appreciation, Criticism, Offensive, None
+---
 
-The ultimate goal is to make online spaces safer by automating misogyny detection in multilingual contexts.
+## 📌 Overview
 
-👩‍💻 Authors
- Tiwari Shaan
+Online misogyny is a growing issue in digital spaces, especially in India where Hindi-English code-mixed comments are common (e.g., YouTube). Detecting such attitudes is challenging due to linguistic complexity and class imbalance.
 
-📊 Dataset
+This project proposes a **hierarchical classification system** for misogyny detection in Hindi-English code-mixed comments, consisting of:
 
-Source: Singh et al. (2025) — YouTube comments on women’s safety
+- **Sentiment Classification:** Optimistic, Pessimistic, Neutral
+- **Comment Categorization:** Suggestion, Appreciation, Criticism, Offensive, None
 
-Size: 12,698 comments
+The goal: **Make online spaces safer by automating misogyny detection in multilingual contexts.**
 
-Subtask 1 (Sentiment)
+---
 
-Optimistic: 1,629
+## 👩‍💻 Authors
 
-Pessimistic: 3,929
+- **Tiwari Shaan**
 
-Neutral: 7,140
+---
 
-Subtask 2 (Categorization)
+## 📊 Dataset
 
-Suggestion: 639
+- **Source:** Singh et al. (2025) — YouTube comments on women’s safety
+- **Size:** 12,698 comments
 
-Appreciation: 405
+### Subtask 1: Sentiment
 
-Criticism: 2,436
+| Label        | Count  |
+|--------------|--------|
+| Optimistic   | 1,629  |
+| Pessimistic  | 3,929  |
+| Neutral      | 7,140  |
 
-Offensive: 1,493
+### Subtask 2: Categorization
 
-None: 7,725
+| Label         | Count  |
+|---------------|--------|
+| Suggestion    | 639    |
+| Appreciation  | 405    |
+| Criticism     | 2,436  |
+| Offensive     | 1,493  |
+| None          | 7,725  |
 
-⚙️ Methodology
-🔹 Preprocessing
+---
 
-Lowercasing
+## ⚙️ Methodology
 
-Removing emoticons, URLs, and noise
+### 🔹 Preprocessing
 
-🔹 Dataset Balancing
+- Lowercasing
+- Removing emoticons, URLs, and noise
 
-Subtask 1: Random oversampling (minority classes → match Neutral)
+### 🔹 Dataset Balancing
 
-Subtask 2: Hybrid oversampling + undersampling
+- **Subtask 1:** Random oversampling (minority classes → match Neutral)
+- **Subtask 2:** Hybrid oversampling + undersampling
 
-🔹 Feature Extraction
+### 🔹 Feature Extraction
 
-paraphrase-multilingual-MiniLM-L12-v2 (Sentence-BERT family)
+- **Model:** `paraphrase-multilingual-MiniLM-L12-v2` (Sentence-BERT family)
+- Chosen for handling code-mixed semantics better than mBERT / FastText
 
-Chosen for better handling of code-mixed semantics compared to mBERT / FastText
+### 🔹 Models Tested
 
-🔹 Models Tested
+- **MLP (Multi-Layer Perceptron) ✅ Best performer**
+- BiLSTM
+- Decision Tree
+- Logistic Regression
+- SVM
+- KNN
+- Multinomial Naïve Bayes
 
-MLP (Multi-Layer Perceptron) ✅ Best performer
+### 🔹 Evaluation Metrics
 
-BiLSTM
+- Macro / Weighted Precision, Recall, F1-score
+- Accuracy comparison
 
-Decision Tree
+---
 
-Logistic Regression
+## 🚀 Results
 
-SVM
+| Subtask                | Best Model | Accuracy | Highlight                                   |
+|------------------------|------------|----------|---------------------------------------------|
+| Sentiment Classification | MLP        | 75%      | Balanced performance across all classes     |
+| Comment Categorization  | MLP        | 73%      | High F1-score (0.90) on minority class      |
+|                        |            |          | Appreciation                                |
 
-KNN
+---
 
-Multinomial Naïve Bayes
+## 🔑 Key Insights
 
-🔹 Evaluation Metrics
+- MLP outperformed all baselines.
+- Sentence-level embeddings from MiniLM captured Hindi-English nuances better than traditional models.
+- BiLSTM underperformed (F1: 0.36/0.17) due to oversampling sensitivity.
+- Severe class imbalance remained the biggest challenge.
 
-Macro / Weighted Precision, Recall, F1-score
+---
 
-Accuracy comparison
+## 📌 Challenges
 
-🚀 Results
-Subtask	Best Model	Accuracy	Highlight
-Sentiment Classification	MLP	75%	Balanced performance across Optimistic & Pessimistic
-Comment Categorization	MLP	73%	High F1-score (0.90) on minority class Appreciation
+- **Code-mixing complexity:** Frequent Hindi-English switching within comments.
+- **Class imbalance:** “Neutral” & “None” dominate the dataset.
+- **Deep learning limitations:** BiLSTM struggled with small minority classes.
 
-🔑 Key Insights
+---
 
-MLP outperformed all baselines.
+## ✅ Conclusion
 
-Sentence-level embeddings from MiniLM captured nuances in Hindi-English better than traditional models.
+- Developed a hierarchical pipeline for misogyny detection in Hindi-English YouTube comments.
+- Achieved ~75% accuracy (Sentiment), ~73% accuracy (Categorization) with MLP.
+- Demonstrated that MiniLM embeddings + MLP outperform baselines.
+- Contributes to safer online spaces via automated detection in multilingual settings.
 
-BiLSTM underperformed (F1: 0.36/0.17) due to oversampling sensitivity.
+---
 
-Severe class imbalance remained the biggest challenge.
+## 📂 Repository Structure
 
-📌 Challenges
+```text
+├── Misogyny Detection Using NLP         # Code Notebook
+├── Misogynistic_Attitude_Detection_DataSet
+├── results/                            # Saved metrics, plots, model comparisons
+├── README.md                           # Project documentation
+└── Requirements.txt                    # Dependencies
+```
 
-Code-mixing complexity → Hindi-English switching within comments.
+---
 
-Class imbalance → “Neutral” & “None” dominating the dataset.
+## 🔧 Installation & Usage
 
-Deep learning limitations → BiLSTM struggled with small minority classes.
+1. **Clone the repo**
+    ```sh
+    git clone https://github.com/Tshaan1104/Misogyny-Detection-NLP
+    cd Misogyny-Detection-NLP
+    ```
+2. **Install dependencies**
+    ```sh
+    pip install -r Requirements.txt
+    ```
+3. **Run the code notebook**
+    - Open `Misogyny Detection Using NLP` in Jupyter Notebook or your preferred environment.
 
-✅ Conclusion
+---
 
-We developed a hierarchical classification pipeline for misogyny detection in Hindi-English YouTube comments.
+## 📚 References
 
-Achieved ~75% accuracy (Sentiment) and ~73% accuracy (Categorization) with MLP.
+- Founta et al. (2019) – RNNs on large-scale tweets
+- Guest et al. (2021) – MLP vs. SVM on misogyny detection
+- Pamungkas et al. (2018) – Cross-lingual SVM + RNN
+- Nayak et al. (2020) – LSTM + transfer learning
+- García-Díaz et al. (2023) – BETO embeddings for Spanish
+- Singh et al. (2025) – mBERT on Hindi-English misogyny detection
+- Aluru et al. (2020) – XLM-RoBERTa + augmentation
 
-Demonstrated that MiniLM embeddings + MLP outperform baselines.
-
-Contributes to building safer online spaces via automated detection in multilingual settings.
-
-📂 Repository Structure (Suggested)
-├── Misogyny Detection Using NLP    # Code Notebook
-|──Misogynistic_Attitude_Detection_DataSet
-├── results/               # Saved metrics, plots, model comparisons
-├── README.md              # Project documentation
-└── Requirements.txt       # Dependencies
-
-🔧 Installation & Usage
-1️⃣ Clone the repo
-git clone https://github.com/Tshaan1104/Misogyny-Detection-NLP
-cd unmasking-misogyny
-
-📚 References
-
-Founta et al. (2019) – RNNs on large-scale tweets
-
-Guest et al. (2021) – MLP vs. SVM on misogyny detection
-
-Pamungkas et al. (2018) – Cross-lingual SVM + RNN
-
-Nayak et al. (2020) – LSTM + transfer learning
-
-García-Díaz et al. (2023) – BETO embeddings for Spanish
-
-Singh et al. (2025) – mBERT on Hindi-English misogyny detection
-
-Aluru et al. (2020) – XLM-RoBERTa + augmentation
+---
