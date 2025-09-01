@@ -4,17 +4,18 @@
 
 ## 📑 Table of Contents
 
-- [Overview](#overview)
-- [Authors](#authors)
-- [Dataset](#dataset)
-- [Methodology](#methodology)
-- [Results](#results)
-- [Key Insights](#key-insights)
-- [Challenges](#challenges)
-- [Conclusion](#conclusion)
-- [Repository Structure](#repository-structure)
-- [Installation & Usage](#installation--usage)
-- [References](#references)
+- [Overview](#-overview)
+- [Authors](#-authors)
+- [Dataset](#-dataset)
+- [Methodology](#-methodology)
+- [Results](#-results)
+- [Key Insights](#-key-insights)
+- [Challenges](#-challenges)
+- [Conclusion](#-conclusion)
+- [Repository Structure](#-repository-structure)
+- [Installation & Usage](#-installation--usage)
+- [References](#-references)
+
 
 ---
 
